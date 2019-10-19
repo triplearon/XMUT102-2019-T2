@@ -1,10 +1,12 @@
 import java.io.Serializable;
-
-public class GameCharacter implements Serializable {
-    int power;
+//用来序列化测试的类
+public class GameCharacter implements Serializable {    //可被序列化的类一定要接入Serializable接口
+    int power;                 
     String type;
     String [] weapons;
 
+    //游戏主角的属性
+    
     public GameCharacter(int p,String y,String[] w){
         this.power=p;
         this.type=y;
