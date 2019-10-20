@@ -1,3 +1,4 @@
 该段代码摘自《head first Java》 本人添加注释与QuizCard类 并在原设计上拓展了符合我们习惯的设计
+主要用到swing
 & next card后可直接保存 但是现在不会在保存文件同时记录未被记录进cardlist的card
 & display完一个cardList后继续加载另外一个进行display
