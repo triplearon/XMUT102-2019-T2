@@ -27,45 +27,31 @@ import java.awt.Color;
  */
 
 public class Snake{
-    private static final int SIZE=30;
-    private static final double SPEED_RATE=0.02; 
-    public  static final double RAD=57.2958;
-    private static double speed=1.0;
-    private double x;
-    private double y;
-    private double dir;
-    private boolean isStepXPositive;
+    public static double speed;
+    private Frog target;
+    public double x;
+    public double y;
     
-    public Frog target;
+    
+      //部分成员变量略
     
     //constructor
     public Snake(){
-        x=this.positionRandom();
-        y=this.positionRandom();
-        dir=this.dirRandom();
+        //构造器略
     }
     
     
     //method
     public void setSpeed(int count){
-        this.speed=1.0+count*SPEED_RATE;
+        this.speed=1.0+count*SPEED_RATE; //用于动态改变蛇的速度 蛇的速度会随着苍蝇吃的多少而改变
     }
     
-    public double getX(){
-        return x;
-    }
-    
-    public double getY(){
-        return y;
-    }
+    //
+    //get set方法略
+    //
     
     public void move(){
-        if(wallTouching()){dir=this.dirRandom();}
-        
-        if(isStepXPositive){
-        x+=speed*Math.cos(dir);
-    }else{x-=speed*Math.cos(dir);}
-        y+=speed*Math.sin(dir);
+       //略
     }
     
     public void chaseForg(){
@@ -77,30 +63,30 @@ public class Snake{
         if(disX>0){isStepXPositive=true;}
         
         if(disX<0){isStepXPositive=false;}
-        
+        //追踪方法 先求目标（青蛙）与蛇之间的x距离 y距离 然后用比例求出反tan的值 再将得到的角度设置为蛇的dir
+        // 由于tan在14和23象限值一样，用一个变量控制蛇的x方向
     }
     
     public void draw(){
-        UI.drawImage("snake.jpg",x-SIZE/2.0,y-SIZE/2.0,SIZE,SIZE);
+        //略
     }
     
     public double getDist(double x,double y){
-        return Math.hypot(this.x-x,this.y-y);
+        return Math.hypot(this.x-x,this.y-y); //获取点到蛇的距离
     }
     //private
     private boolean wallTouching(){
-        return x+SIZE/2.0>=FrogSnakeGame.RIGHT_WALL||
-               y-SIZE/2.0<=FrogSnakeGame.TOP_WALL  ||
-               x-SIZE/2.0<=FrogSnakeGame.LEFT_WALL ||
-               y+SIZE/2.0>=FrogSnakeGame.BOT_WALL ;
+        
+        
+        //撞墙检测 已过时 追踪青蛙永远不会撞墙
     }
     
     private static double dirRandom(){
-        return Math.random()*360;
+        return Math.random()*360;  //随机生成0到360 已过时
     }
     
     private static double positionRandom(){
-        return 65+Math.random()*350;
+        return 65+Math.random()*350; //随机生产x y位置
     }
     
     
