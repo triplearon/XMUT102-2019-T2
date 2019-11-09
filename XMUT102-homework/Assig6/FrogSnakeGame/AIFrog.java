@@ -10,17 +10,19 @@ public class AIFrog extends Frog
 {
     private double xBug;
     private double yBug;
+    //定义苍蝇位置
     
     private double dX;
     private double dY;
-    
+    //定义苍蝇与自身位置差
     
     
     public double AIspeed;
     
     public AIFrog(double x,double h,String dir,String shade){
-        super(x,h,dir,shade);
+        super(x,h,dir,shade); //调用父类构造
     }
+    
     
     public void turnRight(){}
     
@@ -30,16 +32,20 @@ public class AIFrog extends Frog
     
     public void turnDown(){}
     
+    //以上 将控制4个方向的方法全都设置为空 覆盖掉父类方法 防止玩家控制AIfrog
+    
     public void setBugLocation(double x, double y){
         xBug=x;
         yBug=y;
        
         dX=this.x-xBug;
         dY=this.y-yBug;
+        //主函数中调用以设置苍蝇位置
     }
     
     public void setSpeed(Frog g){
         AIspeed=1.0+g.flyCount*0.13;
+        //随着玩家苍蝇吃的越来越多 AI青蛙会越来越快
     }
     
     public void move(){
@@ -57,6 +63,7 @@ public class AIFrog extends Frog
    
         
         //for balance,PC have a little faster than human;
+        // 先调整x与目标相同 再调整y与目标相同 以达到和玩家竞争的效果
     }
     
     
