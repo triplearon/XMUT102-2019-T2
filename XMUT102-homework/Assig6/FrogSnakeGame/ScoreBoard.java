@@ -26,3 +26,4 @@ public class ScoreBoard
         UI.drawString(""+ScoreB,682.5,140);
     }
 }
+//只是很简单的计分板 很简单
