@@ -1,12 +1,3 @@
-// This program is copyright VUW.
-// You are granted permission to use it to construct your answer to a XMUT102 assignment.
-// You may not distribute it in any other way without permission.
-
-/* Code for XMUT102 - 2019T2, Assignment 7
- * Name:
- * Username:
- * ID:
- */
 
 import ecs100.*;
 import java.awt.Color;
@@ -18,69 +9,42 @@ public class MiniPaint{
     protected boolean isFill=false;
 
     
-    protected double xPressed;
-    protected double yPressed;
-    protected String imageName;
-    protected Color colour;
-    protected boolean isComplex=false;
+     //略
     
     /** Set up the GUI */
     public void setupGUI(){
-        UI.setMouseListener( this::doMouse );
-        UI.addButton("Clear", this::clearGraphics);
-        UI.addButton("Fill/No Fill",this::doSetFill);
-        UI.addButton("Color",this::doSetColour);
-        UI.addButton("Line",this::doSetLine);
-        UI.addButton("Rect",this::doSetRect);
-        UI.addButton("Oval",this::doSetOval);
-        UI.addButton("Image",this::doSetImage);
-        UI.addButton("Quit", UI::quit);
-        UI.setDivider(0);  // Hide the text area.
+        //UI略
     }
-    
-    // Methods to change the shape that will be drawn when the mouse is next released.
-    // These methods just save information to the fields.
-    /** Respond to the Line button */
+
     public void clearGraphics(){
         UI.clearGraphics();
-        showCondition();
+      //略
     }
     
     public void doSetLine(){
-        this.shape="Line";
-        this.isComplex=false;
-        this.showCondition();
+        //略
     }
     
  
 
     /** Respond to the Rect button */
     public void doSetRect(){
-        this.shape="Rect";
-        this.isComplex=false;
-        this.showCondition();
+       //略
     }
 
     /** Respond to the Oval button */
     public void doSetOval(){
-        this.shape="Oval";
-        this.isComplex=false;
-        this.showCondition();
+        //略
     }
 
     /** Respond to the Image button */
     public void doSetImage(){
-        this.shape="Image";
-        imageName=UIFileChooser.open();
-        this.isComplex=false;
-        this.showCondition();
-    }
+         //略
 
     /** Respond to the Colour button */
     public void doSetColour(){
-        colour=JColorChooser.showDialog(null,"Choose one color",Color.black);
-        showCondition();
-        
+        colour=JColorChooser.showDialog(null,"Choose one color",Color.black); //颜色设置
+        //略
     }
 
     /** Respond to the Fill/Nofill button */
@@ -91,23 +55,14 @@ public class MiniPaint{
         }else{
         isFill=true;
     
-        }
-        showCondition();
+        }//填充色开关
+       //略
     }
 
-    /**
-     * Respond to mouse events
-     * When pressed, remember the position.
-     * When released, draw what is specified by current shape
-     * Uses the value stored in the field to determine which kind of shape to draw.
-     *  It should call the drawALine, drawARectangle, drawAnOval, or drawAnImage, methods
-     *  passing the x and y where the mouse was released.
-     */
     public void doMouse(String action, double x, double y) {
-        if(action.equals("pressed")){
-            xPressed=x;
-            yPressed=y;
-        }else if(action.equals("released")){
+         //第一点记录略
+        
+        if(action.equals("released")){
             switch(shape){
                 case "Line":this.drawALine(x,y); break;
                 case "Rect":this.drawARectangle(x,y);break;
@@ -118,138 +73,49 @@ public class MiniPaint{
       }
     }
 
-    /**
-     * Draw a line between the mouse pressed and mouse released points.
-     * x and y are the position the mouse was released.
-     */
+        
     public void drawALine(double x, double y){
-       UI.drawLine(xPressed,yPressed,x,y);
+        //画线方法略 太简单了这都不知道不如重学
     }
 
-    /**
-     * Draw a rectangle between the mouse pressed and mouse released points.
-     * x and y are the position the mouse was released.
-     * Works out the left, top, width, and height from x, y, lastX and lastY
-     * Then draws the rectangle, filled or outline, depending on the fill field.
-     */
+   
     public void drawARectangle(double x, double y){
-        double width=x-xPressed;
-        double height=y-yPressed;
+       //间距设置略
         if(!isFill){
         
-        if(width>0 && height>0) {UI.drawRect(xPressed,yPressed,width,height);return;}
+        if(width>0 && height>0) {UI.drawRect(xPressed,yPressed,width,height);}
         
-        if(width>0 && height<0) {UI.drawRect(xPressed,y,width,Math.abs(height));return;}
+        if(width>0 && height<0) {UI.drawRect(xPressed,y,width,Math.abs(height));}
         
-        if(width<0 && height>0) {UI.drawRect(x,yPressed,Math.abs(width),height);return;}
+        if(width<0 && height>0) {UI.drawRect(x,yPressed,Math.abs(width),height);}
         
-        if(width<0 && height<0) {UI.drawRect(x,y,Math.abs(width),Math.abs(height));return;}
+        if(width<0 && height<0) {UI.drawRect(x,y,Math.abs(width),Math.abs(height));}
      } else{
          
-         if(width>0 && height>0) {UI.fillRect(xPressed,yPressed,width,height);return;}
+         if(width>0 && height>0) {UI.fillRect(xPressed,yPressed,width,height);}
         
-        if(width>0 && height<0) {UI.fillRect(xPressed,y,width,Math.abs(height));return;}
+        if(width>0 && height<0) {UI.fillRect(xPressed,y,width,Math.abs(height));}
         
-        if(width<0 && height>0) {UI.fillRect(x,yPressed,Math.abs(width),height);return;}
+        if(width<0 && height>0) {UI.fillRect(x,yPressed,Math.abs(width),height);}
         
-        if(width<0 && height<0) {UI.fillRect(x,y,Math.abs(width),Math.abs(height));return;}
+        if(width<0 && height<0) {UI.fillRect(x,y,Math.abs(width),Math.abs(height));}
         }
+        
+        //以上对应四向画矩形
     }
     
 
-    /**
-     * Draw an oval between the mouse pressed and mouse released points.
-     * x and y are the position the mouse was released.
-     * Works out the left, top, width, and height from x, y, lastX and lastY
-     * Then draws the oval, filled or outline, depending on the fill field.
-     */
     public void drawAnOval(double x, double y){
-        double width=x-xPressed;
-        double height=y-yPressed;
-        if(!isFill){
-        
-        if(width>0 && height<0){
-            UI.drawOval(xPressed,y,width*2,Math.abs(height)*2);
-        }else
-        
-        if(width>0 && height>0){
-            UI.drawOval(xPressed,y-2*height,width*2,height*2);
-        }else
-        
-        if(width<0 && height>0){
-            UI.drawOval(xPressed-2*Math.abs(width),y-2*height,Math.abs(width)*2,height*2);
-        }else
-        
-        if(width<0 && height<0){
-            UI.drawOval(xPressed-2*Math.abs(width),y,Math.abs(width)*2,Math.abs(height)*2);
-        }
-      }else{
-        if(width>0 && height<0){
-            UI.fillOval(xPressed,y,width*2,Math.abs(height)*2);return;
-        }else
-        
-        if(width>0 && height>0){
-            UI.fillOval(xPressed,y-2*height,width*2,height*2);return;
-        }else
-        
-        if(width<0 && height>0){
-            UI.fillOval(xPressed-2*Math.abs(width),y-2*height,Math.abs(width)*2,height*2);return;
-        }else
-        
-        if(width<0 && height<0){
-            UI.fillOval(xPressed-2*Math.abs(width),y,Math.abs(width)*2,Math.abs(height)*2);return;
-        }
-        }
+       //同画矩形 略
     }
 
-    /** 
-     * Draws the current image between the mouse pressed and mouse released points.
-     * x and y are the position the mouse was released.
-     * Works out the left, top, width, and height from x, y, lastX and lastY
-     * Then draws the image, if there is one.
-     */
+ 
     public void drawAnImage(double x, double y){
-        double width=x-xPressed;
-        double height=y-yPressed;
-     
-        
-        if(width>0 && height>0) {UI.drawImage(imageName,xPressed,yPressed,width,height);} else
-        
-        if(width>0 && height<0) {UI.drawImage(imageName,xPressed,y,width,Math.abs(height));} else
-        
-        if(width<0 && height>0) {UI.drawImage(imageName,x,yPressed,Math.abs(width),height);} else
-        
-        if(width<0 && height<0) {UI.drawImage(imageName,x,y,Math.abs(width),Math.abs(height));} 
-     
+        //同画矩形 略
     }
     
     protected void showCondition(){
-        UI.eraseRect(0,0,20,20);
-        UI.setColor(colour);
-        
-        if(shape.equals("Rect")){
-            if(!isFill){
-            UI.drawRect(0,0,20,20); 
-        }else{
-            UI.fillRect(0,0,20,20);
-        }
-      }else
-      
-        if(shape.equals("Oval")){
-            if(!isFill){
-                UI.drawOval(0,0,20,20);
-            }else{
-                UI.fillOval(0,0,20,20);
-            }
-        }else
-        
-        if(shape.equals("Image")){
-            UI.drawImage(imageName,0,0,20,20);
-        }else
-        
-        if(shape.equals("Line")){
-            UI.drawLine(0,0,20,20);
-        }
+        //不用println函数展示当前画笔状态方法 机密
 }
     
     // Main:  constructs a new MiniPaint object and call the setupGUI method
